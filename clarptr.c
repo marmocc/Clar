@@ -2,7 +2,8 @@
 #include <stdlib.h>
 
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size) {
-    if(ptr == NULL) return ERROR_INVALID_PARAMETER;
+    if(ptr == NULL || size <= 0)
+        return ERROR_INVALID_PARAMETER;
 
     ptr->data = malloc(size);
     if(!ptr->data) return ERROR_FAILED_ALLOCATION;
