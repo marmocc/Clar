@@ -1,0 +1,12 @@
+typedef enum ClarErr {
+    SUCCESS = 0,
+
+    _WARNINGS,
+    _END_WARNINGS,
+
+    _ERRORS,
+    ERROR_INVALID_PARAMETER,
+    ERROR_FAILED_ALLOCATION,
+    ERROR_INVALID_FREE_OPERATION,
+    _END_ERRORS
+} ClarErr;
