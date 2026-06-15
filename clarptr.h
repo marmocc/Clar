@@ -21,4 +21,4 @@ typedef struct ClarPtr {
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
 ClarErr clarptr_free(ClarPtr* ptr);
 
-#endif // CLARPTR_H
+#endif /* CLARPTR_H */
