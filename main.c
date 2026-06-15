@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include "clarptr.h"
 
 int main(void)
 {
-    printf("Hello World");
-    return 0;
+    ClarPtr test;
+    clarptr_alloc(&test, sizeof(int));
+    CLARPTR_WRITE(&test, int, 5);
+    printf("%d\n", CLARPTR_READ(&test, int));
+    clarptr_free(&test);
 }

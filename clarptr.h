@@ -12,6 +12,12 @@ typedef struct ClarPtr {
     size_t size;
 } ClarPtr;
 
+#define CLARPTR_WRITE(ptr, type, value) \
+    *( (type*) (ptr)->data ) = (value)
+
+#define CLARPTR_READ(ptr, type) \
+    *( (type*) (ptr)->data )
+
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
 ClarErr clarptr_free(ClarPtr* ptr);
 

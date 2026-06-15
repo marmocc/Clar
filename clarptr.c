@@ -17,7 +17,7 @@ ClarErr clarptr_free(ClarPtr* ptr) {
 
     if(ptr->size <= CLARPTR_DEFAULT_SIZE
     || ptr->data == CLARPTR_DEFAULT_DATA)
-        return ERROR_INVALID_FREE_OPERATION;
+        return ERROR_INVALID_STATE;
 
     free(ptr->data);
     ptr->data = CLARPTR_DEFAULT_DATA;
