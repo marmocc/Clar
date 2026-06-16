@@ -29,7 +29,7 @@ ClarErr clarmem_resize(ClarMem *mem, const size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarmem_write(ClarMem* mem, const void* src) {
+ClarErr clarmem_write(ClarMem *mem, const void *src) {
     if(mem == NULL || src == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
@@ -37,7 +37,7 @@ ClarErr clarmem_write(ClarMem* mem, const void* src) {
     return SUCCESS;
 }
 
-ClarErr clarmem_read(const ClarMem* mem, void* dst) {
+ClarErr clarmem_read(const ClarMem *mem, void *dst) {
     if(mem == NULL || dst == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
