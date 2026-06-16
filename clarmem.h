@@ -10,7 +10,7 @@ typedef struct clarmem_s {
     size_t size;
 } clarmem_t;
 
-clarerr_t clarmem_create(clarmem_t *mem, const size_t size);
+clarmem_t clarmem_create(const size_t size);
 clarerr_t clarmem_resize(clarmem_t *mem, const size_t size);
 clarerr_t clarmem_write(clarmem_t *mem, const void *src);
 clarerr_t clarmem_read(const clarmem_t *mem, void *dst);

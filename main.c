@@ -3,8 +3,7 @@
 
 int main(void)
 {
-    clarmem_t test;
-    clarmem_create(&test, sizeof(int));
+    clarmem_t test = clarmem_create(sizeof(int));
 
     int in = 5;
     clarmem_write(&test, &in);
