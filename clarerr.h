@@ -4,14 +4,13 @@
 typedef enum ClarErr {
     SUCCESS = 0, /* No errors or warnings */
 
-    RANGE_WARNING_START, /* Warnings range start */
-    RANGE_WARNING_END, /* Warning range end */
+    INVALID_PARAMETER, /* A parameter that was passed is invalid */
+    INVALID_STATE, /* An object that was passed is in an invalid state */
+    FAILED_ALLOCATION, /* An alloc failed to allocate the requested memory */
+    FAILED_REALLOCATION, /* A realloc failed, but the original memory is untouched */
 
-    RANGE_ERROR_START, /* Errors range start */
-    ERROR_INVALID_PARAMETER, /* A parameter that was passed is invalid */
-    ERROR_INVALID_STATE, /* An object that was passed is in an invalid state */
-    ERROR_FAILED_ALLOCATION, /* An allocation failed to allocate the requested memory */
-    RANGE_ERROR_END /* Errors range end */
+    ALLOCATION_ON_ALLOCATED, /* An alloc has been requested on an already allocated memory */
+    REALLOCATION_ON_INVALID, /* A realloc has been requested on a never allocated memory */
 } ClarErr;
 
 #endif /* CLARERR */
