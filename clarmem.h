@@ -17,6 +17,7 @@ ClarMem clarmem_init(void);
 
 /* Construction */
 ClarErr clarmem_alloc(ClarMem* mem, size_t size);
+ClarErr clarmem_realloc(ClarMem *mem, size_t size);
 
 /* Usage */
 ClarErr clarmem_invalid(ClarMem* mem);
