@@ -1,8 +1,10 @@
 #include "clarptr.h"
 #include <stdlib.h>
 
+/* Construction */
+
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size) {
-    if(ptr == NULL || size <= 0)
+    if(ptr == NULL || size == 0)
         return ERROR_INVALID_PARAMETER;
 
     ptr->data = malloc(size);
@@ -12,12 +14,21 @@ ClarErr clarptr_alloc(ClarPtr* ptr, size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarptr_free(ClarPtr* ptr) {
+/* Usage */
+
+ClarErr clarptr_invalid(ClarPtr *ptr) {
     if(ptr == NULL) return ERROR_INVALID_PARAMETER;
 
-    if(ptr->size <= CLARPTR_DEFAULT_SIZE
-    || ptr->data == CLARPTR_DEFAULT_DATA)
+    if(ptr->data == CLARPTR_DEFAULT_DATA
+    || ptr->size == CLARPTR_DEFAULT_SIZE)
         return ERROR_INVALID_STATE;
+
+    return SUCCESS; 
+}
+
+ClarErr clarptr_free(ClarPtr* ptr) {
+    ClarErr err = clarptr_invalid(ptr);
+    if(err != SUCCESS) return err;
 
     free(ptr->data);
     ptr->data = CLARPTR_DEFAULT_DATA;

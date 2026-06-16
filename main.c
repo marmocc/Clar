@@ -5,7 +5,7 @@ int main(void)
 {
     ClarPtr test;
     clarptr_alloc(&test, sizeof(int));
-    CLARPTR_WRITE(&test, int, 5);
-    printf("%d\n", CLARPTR_READ(&test, int));
+    if(!clarptr_invalid(&test)) CLARPTR_UNSAFE_WRITE(&test, int, 5);
+    if(!clarptr_invalid(&test)) printf("%d\n", CLARPTR_UNSAFE_READ(&test, int));
     clarptr_free(&test);
 }

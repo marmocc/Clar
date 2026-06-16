@@ -12,13 +12,18 @@ typedef struct ClarPtr {
     size_t size;
 } ClarPtr;
 
-#define CLARPTR_WRITE(ptr, type, value) \
+/* Construction */
+ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
+
+/* Usage */
+ClarErr clarptr_invalid(ClarPtr* ptr);
+
+#define CLARPTR_UNSAFE_WRITE(ptr, type, value) \
     *( (type*) (ptr)->data ) = (value)
 
-#define CLARPTR_READ(ptr, type) \
+#define CLARPTR_UNSAFE_READ(ptr, type) \
     *( (type*) (ptr)->data )
-
-ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
+    
 ClarErr clarptr_free(ClarPtr* ptr);
 
 #endif /* CLARPTR_H */
