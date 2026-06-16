@@ -9,7 +9,7 @@ typedef enum ClarErr {
     FAILED_ALLOCATION, /* An alloc failed to allocate the requested memory */
     FAILED_REALLOCATION, /* A realloc failed, but the original memory is untouched */
 
-    ALLOCATION_ON_ALLOCATED, /* An alloc has been requested on an already allocated memory */
+    ALLOCATION_ON_VALID, /* An alloc has been requested on an already allocated memory */
     REALLOCATION_ON_INVALID, /* A realloc has been requested on a never allocated memory */
 } ClarErr;
 

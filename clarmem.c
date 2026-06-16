@@ -22,7 +22,7 @@ ClarErr clarmem_alloc(ClarMem *mem, size_t size) {
     if(mem == NULL || size == 0)
         return INVALID_PARAMETER;
     if(!clarmem_invalid(mem))
-        return ALLOCATION_ON_ALLOCATED;
+        return ALLOCATION_ON_VALID;
 
     void *data = malloc(size);
     if(!data) return FAILED_ALLOCATION;
