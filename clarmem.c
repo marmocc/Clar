@@ -6,15 +6,20 @@ static inline bool clarmem_is_valid(const clarmem_t *mem) {
     return mem->size != 0 && mem->data != NULL;
 }
 
-clarmem_t clarmem_new(const size_t size) {
-    clarmem_t new_clarmem = {0};
+static inline bool clarmem_is_initialized(const clarmem_t *mem) {
+    return mem->size == 0 && mem->data == NULL;
+}
+
+clarerr_t clarmem_create(clarmem_t *mem, const size_t size) {
+    if (mem == NULL || size == 0) return INVALID_PARAMETER;
+    if(!clarmem_is_initialized(mem)) return INVALID_STATE;
 
     void *data = malloc(size);
-    if(!data) return new_clarmem;
-    
-    new_clarmem.data = data;
-    new_clarmem.size = size;
-    return new_clarmem;
+    if(!data) return FAILED_ALLOCATION;
+
+    mem->data = data;
+    mem->size = size;
+    return SUCCESS;
 }
 
 clarerr_t clarmem_resize(clarmem_t *mem, const size_t size) {
