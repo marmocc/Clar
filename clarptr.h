@@ -12,6 +12,9 @@ typedef struct ClarPtr {
     size_t size;
 } ClarPtr;
 
+/* Initialization */
+ClarPtr clarptr_init();
+
 /* Construction */
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
 

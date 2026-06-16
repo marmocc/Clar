@@ -1,6 +1,14 @@
 #include "clarptr.h"
 #include <stdlib.h>
 
+/* Initialization */
+ClarPtr clarptr_init() {
+    ClarPtr newClarPtr;
+    newClarPtr.data = CLARPTR_DEFAULT_DATA;
+    newClarPtr.size = CLARPTR_DEFAULT_SIZE;
+    return newClarPtr;
+}
+
 /* Construction */
 
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size) {
