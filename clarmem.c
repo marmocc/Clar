@@ -8,34 +8,34 @@ ClarMem clarmem_init(void) {
     return newClarMem;
 }
 
-ClarErr clarmem_alloc(ClarMem* ptr, size_t size) {
-    if(ptr == NULL || size == 0)
+ClarErr clarmem_alloc(ClarMem* mem, size_t size) {
+    if(mem == NULL || size == 0)
         return ERROR_INVALID_PARAMETER;
 
-    ptr->data = malloc(size);
-    if(!ptr->data) return ERROR_FAILED_ALLOCATION;
+    mem->data = malloc(size);
+    if(!mem->data) return ERROR_FAILED_ALLOCATION;
     
-    ptr->size = size;
+    mem->size = size;
     return SUCCESS;
 }
 
-ClarErr clarmem_invalid(ClarMem *ptr) {
-    if(ptr == NULL) return ERROR_INVALID_PARAMETER;
+ClarErr clarmem_invalid(ClarMem *mem) {
+    if(mem == NULL) return ERROR_INVALID_PARAMETER;
 
-    if(ptr->data == CLARMEM_DEFAULT_DATA
-    || ptr->size == CLARMEM_DEFAULT_SIZE)
+    if(mem->data == CLARMEM_DEFAULT_DATA
+    || mem->size == CLARMEM_DEFAULT_SIZE)
         return ERROR_INVALID_STATE;
 
     return SUCCESS; 
 }
 
-ClarErr clarmem_free(ClarMem* ptr) {
-    ClarErr err = clarmem_invalid(ptr);
+ClarErr clarmem_free(ClarMem* mem) {
+    ClarErr err = clarmem_invalid(mem);
     if(err != SUCCESS) return err;
 
-    free(ptr->data);
-    ptr->data = CLARMEM_DEFAULT_DATA;
-    ptr->size = CLARMEM_DEFAULT_SIZE;
+    free(mem->data);
+    mem->data = CLARMEM_DEFAULT_DATA;
+    mem->size = CLARMEM_DEFAULT_SIZE;
 
     return SUCCESS;
 }

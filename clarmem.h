@@ -16,16 +16,16 @@ typedef struct ClarMem {
 ClarMem clarmem_init(void);
 
 /* Construction */
-ClarErr clarmem_alloc(ClarMem* ptr, size_t size);
+ClarErr clarmem_alloc(ClarMem* mem, size_t size);
 
 /* Usage */
-ClarErr clarmem_invalid(ClarMem* ptr);
-#define CLARMEM_UNSAFE_WRITE(ptr, type, value) \
-    *( (type*) (ptr)->data ) = (value)
-#define CLARMEM_UNSAFE_READ(ptr, type) \
-    *( (type*) (ptr)->data )
+ClarErr clarmem_invalid(ClarMem* mem);
+#define CLARMEM_UNSAFE_WRITE(mem, type, value) \
+    *( (type*) (mem)->data ) = (value)
+#define CLARMEM_UNSAFE_READ(mem, type) \
+    *( (type*) (mem)->data )
 
 /* Destruction */
-ClarErr clarmem_free(ClarMem* ptr);
+ClarErr clarmem_free(ClarMem* mem);
 
 #endif /* CLARMEM_H */
