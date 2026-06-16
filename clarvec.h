@@ -10,4 +10,4 @@ typedef struct ClarVec {
     size_t count;
 } ClarVec;
 
-#endif /* CLARVEC */
+#endif /* CLARVEC_H */

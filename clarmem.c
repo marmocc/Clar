@@ -8,7 +8,7 @@ ClarMem clarmem_init(void) {
     return newClarMem;
 }
 
-ClarErr clarmem_invalid(ClarMem *mem) {
+ClarErr clarmem_check(const ClarMem *mem) {
     if(mem == NULL) return INVALID_PARAMETER;
 
     if(mem->data == CLARMEM_DEFAULT_DATA
@@ -18,10 +18,14 @@ ClarErr clarmem_invalid(ClarMem *mem) {
     return SUCCESS; 
 }
 
+inline bool clarmem_is_valid(const ClarMem* mem) {
+    return clarmem_check(mem) == SUCCESS;
+}
+
 ClarErr clarmem_alloc(ClarMem *mem, size_t size) {
     if(mem == NULL || size == 0)
         return INVALID_PARAMETER;
-    if(!clarmem_invalid(mem))
+    if(clarmem_is_valid(mem))
         return ALLOCATION_ON_VALID;
 
     void *data = malloc(size);
@@ -35,7 +39,7 @@ ClarErr clarmem_alloc(ClarMem *mem, size_t size) {
 ClarErr clarmem_realloc(ClarMem *mem, size_t size) {
     if (mem == NULL || size == 0)
         return INVALID_PARAMETER;
-    if(clarmem_invalid(mem))
+    if(!clarmem_is_valid(mem))
         return REALLOCATION_ON_INVALID;
 
     void *data = realloc(mem->data, size);
@@ -47,7 +51,7 @@ ClarErr clarmem_realloc(ClarMem *mem, size_t size) {
 }
 
 ClarErr clarmem_free(ClarMem *mem) {
-    ClarErr err = clarmem_invalid(mem);
+    ClarErr err = clarmem_check(mem);
     if(err != SUCCESS) return err;
 
     free(mem->data);
