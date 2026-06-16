@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "clarptr.h"
+#include "clarmem.h"
 
 int main(void)
 {
-    ClarPtr test = clarptr_init();
-    clarptr_alloc(&test, sizeof(int));
-    if(!clarptr_invalid(&test)) CLARPTR_UNSAFE_WRITE(&test, int, 5);
-    if(!clarptr_invalid(&test)) printf("%d\n", CLARPTR_UNSAFE_READ(&test, int));
-    clarptr_free(&test);
+    ClarMem test = clarmem_init();
+    clarmem_alloc(&test, sizeof(int));
+    if(!clarmem_invalid(&test)) CLARMEM_UNSAFE_WRITE(&test, int, 5);
+    if(!clarmem_invalid(&test)) printf("%d\n", CLARMEM_UNSAFE_READ(&test, int));
+    clarmem_free(&test);
 }
