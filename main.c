@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    clarmem_t test = clarmem_create(sizeof(int));
+    clarmem_t test = clarmem_new(sizeof(int));
 
     int in = 5;
     clarmem_write(&test, &in);
@@ -13,5 +13,5 @@ int main(void)
     clarmem_read(&test, &out);
     printf("%d\n", out);
 
-    clarmem_destroy(&test);
+    clarmem_dispose(&test);
 }

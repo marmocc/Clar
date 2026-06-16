@@ -6,7 +6,7 @@ static inline bool clarmem_is_valid(const clarmem_t *mem) {
     return mem->size != 0 && mem->data != NULL;
 }
 
-clarmem_t clarmem_create(const size_t size) {
+clarmem_t clarmem_new(const size_t size) {
     clarmem_t new_clarmem = {0};
 
     void *data = malloc(size);
@@ -45,7 +45,7 @@ clarerr_t clarmem_read(const clarmem_t *mem, void *dst) {
     return SUCCESS;
 }
 
-clarerr_t clarmem_destroy(clarmem_t *mem) {
+clarerr_t clarmem_dispose(clarmem_t *mem) {
     if(mem == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
