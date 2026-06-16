@@ -2,28 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-ClarMem clarmem_init(void) {
-    ClarMem newClarMem;
-    newClarMem.data = CLARMEM_DEFAULT_DATA;
-    newClarMem.size = CLARMEM_DEFAULT_SIZE;
-    return newClarMem;
+static inline bool clarmem_is_valid(const ClarMem *mem) {
+    return mem->size != 0 && mem->data != NULL;
 }
 
-ClarErr clarmem_check(const ClarMem *mem) {
-    if(mem == NULL) return INVALID_PARAMETER;
-
-    if(mem->data == CLARMEM_DEFAULT_DATA
-    || mem->size == CLARMEM_DEFAULT_SIZE)
-        return INVALID_STATE;
-
-    return SUCCESS; 
-}
-
-ClarErr clarmem_alloc(ClarMem *mem, const size_t size) {
-    if(mem == NULL || size == 0)
-        return INVALID_PARAMETER;
-    if(clarmem_check(mem) == SUCCESS)
-        return ALLOCATION_ON_VALID;
+ClarErr clarmem_create(ClarMem *mem, const size_t size) {
+    if(mem == NULL || size == 0) return INVALID_PARAMETER;
 
     void *data = malloc(size);
     if(!data) return FAILED_ALLOCATION;
@@ -33,11 +17,9 @@ ClarErr clarmem_alloc(ClarMem *mem, const size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarmem_realloc(ClarMem *mem, const size_t size) {
-    if (mem == NULL || size == 0)
-        return INVALID_PARAMETER;
-    if(clarmem_check(mem) != SUCCESS)
-        return REALLOCATION_ON_INVALID;
+ClarErr clarmem_resize(ClarMem *mem, const size_t size) {
+    if (mem == NULL || size == 0) return INVALID_PARAMETER;
+    if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
     void *data = realloc(mem->data, size);
     if (!data) return FAILED_REALLOCATION;
@@ -48,30 +30,27 @@ ClarErr clarmem_realloc(ClarMem *mem, const size_t size) {
 }
 
 ClarErr clarmem_write(ClarMem* mem, const void* src) {
-    ClarErr err = clarmem_check(mem);
-    if(err != SUCCESS) return err;
-    if(src == NULL) return INVALID_PARAMETER;
+    if(mem == NULL || src == NULL) return INVALID_PARAMETER;
+    if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
     memcpy(mem->data, src, mem->size);
     return SUCCESS;
 }
 
 ClarErr clarmem_read(const ClarMem* mem, void* dst) {
-    ClarErr err = clarmem_check(mem);
-    if(err != SUCCESS) return err;
-    if(dst == NULL) return INVALID_PARAMETER;
+    if(mem == NULL || dst == NULL) return INVALID_PARAMETER;
+    if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
     memcpy(dst, mem->data, mem->size);
     return SUCCESS;
 }
 
-ClarErr clarmem_free(ClarMem *mem) {
-    ClarErr err = clarmem_check(mem);
-    if(err != SUCCESS) return err;
+ClarErr clarmem_destroy(ClarMem *mem) {
+    if(mem == NULL) return INVALID_PARAMETER;
+    if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
     free(mem->data);
-    mem->data = CLARMEM_DEFAULT_DATA;
-    mem->size = CLARMEM_DEFAULT_SIZE;
-
+    mem->data = NULL;
+    mem->size = 0;
     return SUCCESS;
 }

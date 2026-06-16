@@ -3,8 +3,8 @@
 
 int main(void)
 {
-    ClarMem test = clarmem_init();
-    clarmem_alloc(&test, sizeof(int));
+    ClarMem test;
+    clarmem_create(&test, sizeof(int));
 
     int in = 5;
     clarmem_write(&test, &in);
@@ -13,6 +13,6 @@ int main(void)
     printf("%d\n", out);
     clarmem_read(&test, &out);
     printf("%d\n", out);
-    
-    clarmem_free(&test);
+
+    clarmem_destroy(&test);
 }
