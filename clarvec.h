@@ -4,10 +4,10 @@
 #include "clarmem.h"
 
 typedef struct ClarVec {
-    ClarMem mem;
+    ClarMem memory;
     size_t stride;
-    int capacity;
-    int count;
+    size_t capacity;
+    size_t count;
 } ClarVec;
 
 #endif /* CLARVEC */
