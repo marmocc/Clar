@@ -1,5 +1,6 @@
 #include "clarmem.h"
 #include <stdlib.h>
+#include <string.h>
 
 ClarMem clarmem_init(void) {
     ClarMem newClarMem;
@@ -18,14 +19,10 @@ ClarErr clarmem_check(const ClarMem *mem) {
     return SUCCESS; 
 }
 
-inline bool clarmem_is_valid(const ClarMem* mem) {
-    return clarmem_check(mem) == SUCCESS;
-}
-
-ClarErr clarmem_alloc(ClarMem *mem, size_t size) {
+ClarErr clarmem_alloc(ClarMem *mem, const size_t size) {
     if(mem == NULL || size == 0)
         return INVALID_PARAMETER;
-    if(clarmem_is_valid(mem))
+    if(clarmem_check(mem) == SUCCESS)
         return ALLOCATION_ON_VALID;
 
     void *data = malloc(size);
@@ -36,10 +33,10 @@ ClarErr clarmem_alloc(ClarMem *mem, size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarmem_realloc(ClarMem *mem, size_t size) {
+ClarErr clarmem_realloc(ClarMem *mem, const size_t size) {
     if (mem == NULL || size == 0)
         return INVALID_PARAMETER;
-    if(!clarmem_is_valid(mem))
+    if(clarmem_check(mem) != SUCCESS)
         return REALLOCATION_ON_INVALID;
 
     void *data = realloc(mem->data, size);
@@ -47,6 +44,24 @@ ClarErr clarmem_realloc(ClarMem *mem, size_t size) {
 
     mem->data = data;
     mem->size = size;
+    return SUCCESS;
+}
+
+ClarErr clarmem_write(ClarMem* mem, const void* src) {
+    ClarErr err = clarmem_check(mem);
+    if(err != SUCCESS) return err;
+    if(src == NULL) return INVALID_PARAMETER;
+
+    memcpy(mem->data, src, mem->size);
+    return SUCCESS;
+}
+
+ClarErr clarmem_read(const ClarMem* mem, void* dst) {
+    ClarErr err = clarmem_check(mem);
+    if(err != SUCCESS) return err;
+    if(dst == NULL) return INVALID_PARAMETER;
+
+    memcpy(dst, mem->data, mem->size);
     return SUCCESS;
 }
 

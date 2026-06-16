@@ -5,7 +5,14 @@ int main(void)
 {
     ClarMem test = clarmem_init();
     clarmem_alloc(&test, sizeof(int));
-    if(clarmem_is_valid(&test)) CLARMEM_UNSAFE_WRITE(&test, int, 5);
-    if(clarmem_is_valid(&test)) printf("%d\n", CLARMEM_UNSAFE_READ(&test, int));
+
+    int in = 5;
+    clarmem_write(&test, &in);
+
+    int out = 1;
+    printf("%d\n", out);
+    clarmem_read(&test, &out);
+    printf("%d\n", out);
+    
     clarmem_free(&test);
 }
