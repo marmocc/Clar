@@ -1,3 +1,6 @@
+#ifndef CLARERR_H
+#define CLARERR_H
+
 typedef enum ClarErr {
     SUCCESS = 0, /* No errors or warnings */
 
@@ -10,3 +13,5 @@ typedef enum ClarErr {
     ERROR_FAILED_ALLOCATION, /* An allocation failed to allocate the requested memory */
     RANGE_ERROR_END /* Errors range end */
 } ClarErr;
+
+#endif /* CLARERR */
