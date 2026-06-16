@@ -13,20 +13,19 @@ typedef struct ClarPtr {
 } ClarPtr;
 
 /* Initialization */
-ClarPtr clarptr_init();
+ClarPtr clarptr_init(void);
 
 /* Construction */
 ClarErr clarptr_alloc(ClarPtr* ptr, size_t size);
 
 /* Usage */
 ClarErr clarptr_invalid(ClarPtr* ptr);
-
 #define CLARPTR_UNSAFE_WRITE(ptr, type, value) \
     *( (type*) (ptr)->data ) = (value)
-
 #define CLARPTR_UNSAFE_READ(ptr, type) \
     *( (type*) (ptr)->data )
-    
+
+/* Destruction */
 ClarErr clarptr_free(ClarPtr* ptr);
 
 #endif /* CLARPTR_H */
