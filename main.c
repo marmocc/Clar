@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    ClarMem test;
+    clarmem_t test;
     clarmem_create(&test, sizeof(int));
 
     int in = 5;

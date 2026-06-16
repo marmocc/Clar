@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-static inline bool clarmem_is_valid(const ClarMem *mem) {
+static inline bool clarmem_is_valid(const clarmem_t *mem) {
     return mem->size != 0 && mem->data != NULL;
 }
 
-ClarErr clarmem_create(ClarMem *mem, const size_t size) {
+clarerr_t clarmem_create(clarmem_t *mem, const size_t size) {
     if(mem == NULL || size == 0) return INVALID_PARAMETER;
 
     void *data = malloc(size);
@@ -17,7 +17,7 @@ ClarErr clarmem_create(ClarMem *mem, const size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarmem_resize(ClarMem *mem, const size_t size) {
+clarerr_t clarmem_resize(clarmem_t *mem, const size_t size) {
     if (mem == NULL || size == 0) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
@@ -29,7 +29,7 @@ ClarErr clarmem_resize(ClarMem *mem, const size_t size) {
     return SUCCESS;
 }
 
-ClarErr clarmem_write(ClarMem *mem, const void *src) {
+clarerr_t clarmem_write(clarmem_t *mem, const void *src) {
     if(mem == NULL || src == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
@@ -37,7 +37,7 @@ ClarErr clarmem_write(ClarMem *mem, const void *src) {
     return SUCCESS;
 }
 
-ClarErr clarmem_read(const ClarMem *mem, void *dst) {
+clarerr_t clarmem_read(const clarmem_t *mem, void *dst) {
     if(mem == NULL || dst == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 
@@ -45,7 +45,7 @@ ClarErr clarmem_read(const ClarMem *mem, void *dst) {
     return SUCCESS;
 }
 
-ClarErr clarmem_destroy(ClarMem *mem) {
+clarerr_t clarmem_destroy(clarmem_t *mem) {
     if(mem == NULL) return INVALID_PARAMETER;
     if(!clarmem_is_valid(mem)) return INVALID_STATE;
 

@@ -3,11 +3,11 @@
 
 #include "clarmem.h"
 
-typedef struct ClarVec {
-    ClarMem memory;
+typedef struct clarvec_s {
+    clarmem_t memory;
     size_t stride;
     size_t capacity;
     size_t count;
-} ClarVec;
+} clarvec_t;
 
 #endif /* CLARVEC_H */

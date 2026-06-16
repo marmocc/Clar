@@ -5,15 +5,15 @@
 #include <stdbool.h>
 #include "clarerr.h"
 
-typedef struct ClarMem {
+typedef struct clarmem_s {
     void *data;
     size_t size;
-} ClarMem;
+} clarmem_t;
 
-ClarErr clarmem_create(ClarMem *mem, const size_t size);
-ClarErr clarmem_resize(ClarMem *mem, const size_t size);
-ClarErr clarmem_write(ClarMem *mem, const void *src);
-ClarErr clarmem_read(const ClarMem *mem, void *dst);
-ClarErr clarmem_destroy(ClarMem *mem);
+clarerr_t clarmem_create(clarmem_t *mem, const size_t size);
+clarerr_t clarmem_resize(clarmem_t *mem, const size_t size);
+clarerr_t clarmem_write(clarmem_t *mem, const void *src);
+clarerr_t clarmem_read(const clarmem_t *mem, void *dst);
+clarerr_t clarmem_destroy(clarmem_t *mem);
 
 #endif /* CLARMEM_H */
