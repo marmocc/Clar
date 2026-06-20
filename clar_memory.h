@@ -2,7 +2,6 @@
 #define CLAR_MEMORY_H
 
 #include <stddef.h>
-#include <stdbool.h>
 #include "clar_error.h"
 #include "clar_span.h"
 
