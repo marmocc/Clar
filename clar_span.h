@@ -12,5 +12,6 @@ typedef struct {
 CLAR_FALLIBLE_GENERATE(clar_span, span);
 clar_fallible_void clar_span_write(clar_span span, const void *source);
 clar_fallible_void clar_span_read(const clar_span span, void *destination);
+clar_fallible_span clar_span_offset(const clar_span span, const size_t offset);
 
 #endif /* CLAR_SPAN_H */
