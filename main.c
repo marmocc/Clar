@@ -6,7 +6,7 @@ int main(void)
     clar_fallible_memory test = clar_memory_new(sizeof(int));
     if(test.error != SUCCESS) return test.error;
 
-    clar_fallible_span span = clar_memory_span(&test.value, sizeof(int));
+    clar_fallible_span span = clar_memory_span(&test.value);
 
     int source = 5;
     clar_span_write(span.value, &source);

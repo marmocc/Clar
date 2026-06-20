@@ -16,7 +16,14 @@ clar_fallible_memory clar_memory_new(const size_t size) {
     return (clar_fallible_memory){ .value = memory, .error = SUCCESS };
 }
 
-clar_fallible_span clar_memory_span(clar_memory *memory, const size_t length) {
+clar_fallible_span clar_memory_span(clar_memory *memory) {
+    if (memory == NULL) return (clar_fallible_span){ .error = NULL_REFERENCE };
+    if (!is_valid(memory)) return (clar_fallible_span){ .error = INVALID_STATE };
+    clar_span span = { .data = memory->data, .size = memory->size };
+    return (clar_fallible_span){ .value = span, .error = SUCCESS };
+}
+
+clar_fallible_span clar_memory_subspan(clar_memory *memory, const size_t length) {
     if (memory == NULL) return (clar_fallible_span){ .error = NULL_REFERENCE };
     if (length == 0) return (clar_fallible_span){ .error = INVALID_ARGUMENT };
     if (!is_valid(memory)) return (clar_fallible_span){ .error = INVALID_STATE };

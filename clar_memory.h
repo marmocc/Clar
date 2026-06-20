@@ -12,7 +12,8 @@ typedef struct {
 
 CLAR_FALLIBLE_GENERATE(clar_memory, memory);
 clar_fallible_memory clar_memory_new(const size_t size);
-clar_fallible_span clar_memory_span(clar_memory *memory, const size_t length);
+clar_fallible_span clar_memory_span(clar_memory *memory);
+clar_fallible_span clar_memory_subspan(clar_memory *memory, const size_t length);
 clar_fallible_void clar_memory_resize(clar_memory *memory, const size_t size);
 clar_fallible_void clar_memory_dispose(clar_memory *memory);
 
